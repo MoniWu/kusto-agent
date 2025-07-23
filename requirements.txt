@@ -1,0 +1,21 @@
+# LangChain and LangGraph dependencies
+langchain-core>=0.1.0
+langchain-openai>=0.1.0
+langgraph>=0.0.23
+langchain-mcp-adapters>=0.1.0
+httpx>=0.28.1
+httpx-sse>=0.4.0
+pydantic>=2.11.3
+sse-starlette>=2.3.3
+starlette>=0.46.2
+typing-extensions>=4.13.2
+
+# Web server
+uvicorn>=0.23.0
+
+# Google's A2A Protocol SDK
+a2a-sdk>=0.1.0
+
+# Kubernetes dependencies
+kubernetes>=29.0.0
+click>=8.0.0
