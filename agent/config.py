@@ -20,6 +20,9 @@ DEFAULT_CONFIG = {
     },
     "appinsight": {
         "app_id": None,  # Should be set via environment variable
+    },
+    "openai":{
+        "openai_api_key": None
     }
 }
 
@@ -63,6 +66,10 @@ def get_config(config_path=None):
     # Override AppInsight settings from environment variables
     if os.environ.get('AZURE_APPINSIGHT_ID'):
         config['appinsight']['app_id'] = os.environ.get('AZURE_APPINSIGHT_ID')
+    
+    # Override OpenAI settings from environment variables
+    if os.environ.get('OPEN_API_KEY'):
+        config['openai']['openai_api_key'] = os.environ.get('OPEN_API_KEY')
 
 
     return config
