@@ -1,6 +1,6 @@
 from azure.identity import InteractiveBrowserCredential
 import requests
-from agent.config import get_config
+from config import get_config
 from openai import AzureOpenAI
 import click
 from langchain.document_loaders import TextLoader
@@ -20,15 +20,19 @@ def main(host: str, port: int, config_path: str = None):
     app_id = config.get('appinsight',{})["app_id"]
     #Check for Azure OpenAI configuration
     azure_config = config.get('azure_openai', {})
-    print(azure_config)
     
-    user_input = input("Please input the requirement for the query:")
-    print("Generating kusto query......")
-    
-    kusto_query = generate_kusto_query(user_input,azure_config)
-    print(f"The generated kusto query is:\n {kusto_query}")
+    while True:
+        user_input = input("Please input the requirement for the query:")
+        if user_input.strip().lower() == "exit":
+            print("Exiting...")
+            break
+        
+        print("Generating kusto query......")
+        
+        kusto_query = generate_kusto_query(user_input,azure_config)
+        print(f"The generated kusto query is:\n {kusto_query}")
 
-    execute_kusto_query(kusto_query,token,app_id)        
+        execute_kusto_query(kusto_query,token,app_id)        
 
 def generate_kusto_query(user_input,azure_config):
     client = AzureOpenAI(
